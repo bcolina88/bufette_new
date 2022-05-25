@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use App\Model\User;
 use App\Model\Role;
 use App\Model\Caso;
+use App\Model\Cita;
 use App\Model\Expediente;
+use App\Model\Cliente;
 use Illuminate\Support\Facades\File;
 
 use DB;
@@ -47,17 +49,31 @@ class CitasController extends Controller
         $search = $request->get('search');
 
 
-        $orders = Caso::Join('expedientes', function($f) use($search)
+        $citas = Cita::Join('clientes', function($f) use($search)
                     {
-                        $f->on('expedientes.id','=','casos.idexpediente');
+                        $f->on('clientes.id','=','citas.cliente_id');
                     
-                    })->orWhere('casos.proceso','LIKE','%'.$search.'%')
-                      ->orWhere('expedientes.numero','LIKE','%'.$search.'%')
-                      ->orderBy('casos.id','DESC')
-                      ->select('casos.*')
+                    })->Join('users', function($f) use($search)
+                    {
+                        $f->on('users.id','=','citas.encargado_id');
+                    
+                    })->Join('casos', function($f) use($search)
+                    {
+                        $f->on('casos.id','=','citas.caso_id');
+                    
+                    })->orWhere('citas.fecha','LIKE','%'.$search.'%')
+                      ->orWhere('citas.motivo','LIKE','%'.$search.'%')
+                      ->orWhere('citas.prioridad','LIKE','%'.$search.'%')
+                      ->orWhere('users.nombre','LIKE','%'.$search.'%')
+                      ->orWhere('users.apellido','LIKE','%'.$search.'%')
+                      ->orWhere('clientes.nombre','LIKE','%'.$search.'%')
+                      ->orWhere('clientes.apellido','LIKE','%'.$search.'%')
+                      ->orWhere('casos.proceso','LIKE','%'.$search.'%')
+                      ->orderBy('citas.id','DESC')
+                      ->select('citas.*')
                       ->paginate(25);
 
-        return view('caso.listado', compact('orders'));
+        return view('cita.listado', compact('citas'));
   
 
 
@@ -74,11 +90,13 @@ class CitasController extends Controller
     {
         
 
-        $user2 = [];
+        $cita = [];
         $tipo = "guardar";
-        $expedientes = Expediente::where('estado','!=',"Terminado")->where('estado','!=',"Rechazado")->get();
+        $abogados = user::where('idrole','!=',1)->get();
+        $clientes = cliente::all();
+        $casos = caso::all();
 
-        return view('caso.crear',compact('user2','tipo','expedientes'));
+        return view('cita.crear',compact('abogados','tipo','cita','clientes','casos'));
     }
 
     /**
@@ -100,7 +118,7 @@ class CitasController extends Controller
         if($request->tipo === "guardar"){
 
 
-        	if ($request->file('images')) {
+        	/*if ($request->file('images')) {
 
 
                             $photos = $request->file('images');
@@ -132,25 +150,29 @@ class CitasController extends Controller
 
                             }
 
-            }
+            }*/
 
 
 
 
-            $user = Caso::firstOrCreate([
-              		'idexpediente' => $request->expediente,
-                    'descripcion'  => $request->description,
-                    'proceso'      => $request->proceso,
-                    'documentos'   => $images
+            $cita = Cita::firstOrCreate([
+              		'fecha' => $request->fecha,
+                    'motivo'  => $request->motivo,
+                    'prioridad'      => $request->prioridad,
+                    'cliente_id'   => $request->cliente_id,
+                    'encargado_id'   => $request->encargado_id,
+                    'caso_id'   => $request->caso_id,
+                    'notificar'    => 1,
+
 
             ]);
 
 
 
-            $user->save();
+            $cita->save();
 
-            session::flash('message','El Caso Fue Creado Correctamente');
-            return redirect(route('casos.index')); 
+            session::flash('message','La cita fue creada correctamente');
+            return redirect(route('citas.index')); 
 
 
         }  
@@ -160,90 +182,35 @@ class CitasController extends Controller
 
 
 
-        	if ($request->file('images')) {
+        
 
 
-                        $photos = $request->file('images');
-
-                        if (!is_array($photos)) {
-                            $photos = [$photos];
-                        }
-
-                        if (!is_dir($this->photos_path)) {
-                            mkdir($this->photos_path, 0777);
-                        }
-
-
-                        for ($i = 0; $i < count($photos); $i++) {
-
-                            $photo = $photos[$i];
-                            $name = sha1(date('YmdHis') . str_random(30));
-                            $save_name = $name . '.' . $photo->getClientOriginalExtension();
-                            $resize_name = $name . str_random(2) . '.' . $photo->getClientOriginalExtension();
-
-                            $photo->move($this->photos_path, $save_name);
-                            
-                               
-                            //$src = url("/{$this->photos_path}/{$save_name}");
-
-                            //$ruta = $request->root();
-                            $src = $this->photos_path.'/'.$save_name;
-
-                            $images = $src.','.$images;
-
-                        }
+                        $cita = Cita::find($request->id);
 
 
 
-                        $user = Caso::find($request->id);
-
-                        $document_new = $images.$user->documentos;
-
-
-
-                        $user->fill([
+                        $cita->fill([
                          
-                         'idexpediente' => $request->expediente,
-                    	 'descripcion'  => $request->description,
-                         'proceso'      => $request->proceso,
-                         'documentos'   => $document_new
+                            'fecha' => $request->fecha,
+		                    'motivo'  => $request->motivo,
+		                    'prioridad'      => $request->prioridad,
+		                    'cliente_id'   => $request->cliente_id,
+		                    'encargado_id'   => $request->encargado_id,
+		                    'caso_id'   => $request->caso_id,
+		                    'notificar'    => $request->notificar,
 
                         ]);
 
 
 
-                        $user->save();
+                        $cita->save();
 
-                        session::flash('message','El Caso Fue Actualizado Correctamente');
-                        return redirect(route('casos.index')); 
-
-
-
-            }else{
-
-
-                        $user = Caso::find($request->id);
+                        session::flash('message','La cita fue actualizada correctamente');
+                        return redirect(route('citas.index')); 
 
 
 
-                        $user->fill([
-                         
-                         'idexpediente' => $request->expediente,
-                    	 'descripcion'  => $request->description,
-                         'proceso'      => $request->proceso,
-
-                        ]);
-
-
-
-                        $user->save();
-
-                        session::flash('message','El Caso Fue Actualizado Correctamente');
-                        return redirect(route('casos.index')); 
-
-
-
-            }
+           
 
 
         }
@@ -263,32 +230,9 @@ class CitasController extends Controller
     public function show($id)
     {
 
+        $cita =  Cita::with(['encargado','cliente','caso'])->where('id',$id)->first();
+        return view('cita.detalle', compact('cita'));
 
-        $users = Order::find($id);
-
-
-        $movements = Historical::with(['empleado', 'transcriptor'])
-                      ->where("historicals.idempleado", $id)
-                      ->orderBy('historicals.id','DESC')       
-                      ->select('historicals.*')
-                      ->get();
-
-        if(count($movements)>0){
-            $ultimo_pay = $movements[0];
-        }else{
-            $ultimo_pay = [];
-        }
-
-
-        $seguro_social = explode("-", $users->seguro_social);
-        $ssn = $seguro_social[2];
-      
-
-
-
-        //return $movements[1];
-
-        return view('ordenes.detalle', compact('users','movements','ultimo_pay','ssn'));
     }
 
 
@@ -303,13 +247,14 @@ class CitasController extends Controller
     public function edit(Request $request, $id)
     {
         
-        $user2 = Caso::find($id);
-        $ruta = $request->root();
+        $cita = Cita::find($id);
+       // $ruta = $request->root();
+		$tipo = "editar";
+        $abogados = user::where('idrole','=',2)->get();
+        $clientes = cliente::all();
+        $casos = caso::all();
 
-        $expedientes = Expediente::where('estado','!=',"Terminado")->where('estado','!=',"Rechazado")->get();
-        $tipo = "editar";
-
-        return view('caso.editar', compact('user2','tipo','expedientes','ruta'));
+        return view('cita.editar',compact('abogados','tipo','cita','clientes','casos'));
 
 
     }
@@ -332,19 +277,19 @@ class CitasController extends Controller
     public function destroy($id)
     {
         
-    	$Caso = Caso::find($id);
-        $periodo = explode(",", $Caso->documentos);
+    	//$Cita = Cita::find($id);
+        //$periodo = explode(",", $Caso->documentos);
 
 
-        for ($i=0; $i < count($periodo); $i++) { 
+       /* for ($i=0; $i < count($periodo); $i++) { 
 
         	$ruta = $ruta = public_path().'/'.$periodo[$i];
 		    File::delete($ruta);
-        }
+        }*/
 
-        Caso::destroy($id);
-        session::flash('message','El Caso Fue Eliminado Correctamente');
-        return redirect(route('casos.index')); 
+        Cita::destroy($id);
+        session::flash('message','La cita fue eliminada correctamente');
+        return redirect(route('citas.index')); 
 
     }
 
@@ -378,6 +323,22 @@ class CitasController extends Controller
 
         return \Response::make($content,200,$headers);
         
+    }
+
+
+    public function notificar($id)
+    {
+        
+        $cita =  cita::where('id',$id)->first();
+
+        $cita->fill([
+            'notificar'    => 0,
+		]);
+
+        $cita->save();
+
+        return view('cita.detalle', compact('cita'));
+
     }
 
 

@@ -1,12 +1,12 @@
 @extends('layout.template')
 @section('title')
-Listado de Casos | Bufette
+Listado de Citas | Bufette
 @endsection
 @section('content')
 
   <section class="content-header">
       <h1>
-        Listado de Casos
+        Listado de Citas
         <small></small>
     </section>
 
@@ -23,7 +23,7 @@ Listado de Casos | Bufette
              <p class="alert alert-info"><b>{{ Session::get('message')}}</b></p>
             @endif
 
-            {!!Form::open(['route'=>'casos.index', 'method'=>'GET'])!!}
+            {!!Form::open(['route'=>'citas.index', 'method'=>'GET'])!!}
             <div class="input-group">
 
                       <input type="text" name="search" class="form-control input-sm pull-right" style="width: 150px;" placeholder="Buscar..."/>
@@ -41,8 +41,11 @@ Listado de Casos | Bufette
                   <thead>
                   <tr>
                     <th>#</th>
-                    <th>Nº Expediente</th>
-                    <th>Proceso</th>
+                    <th>Fecha</th>
+                    <th>Prioridad</th>
+                    <th>Caso</th>
+                    <th>Cliente</th>
+                    <th>Solicitante</th>
 
                     
                     @if (Auth::user()->idrole != 3)
@@ -51,13 +54,16 @@ Listado de Casos | Bufette
                   </tr>
                   </thead>
                   <tbody>
-                    @forelse ($orders as $key => $user)
+                    @forelse ($citas as $key => $user)
                   <tr>
 
                   
                     <td>#{{$user->id}}</td>
-                    <td>{{$user->expediente->numero}}</td>
-                    <td>{{$user->proceso}}</td>
+                    <td>{{$user->fecha}}</td>
+                    <td>{{$user->prioridad}}</td>
+                    <td>{{$user->caso->proceso}}</td>
+                    <td>{{$user->cliente->nombre}} {{$user->cliente->apellido}}</td>
+                    <td>{{$user->encargado->nombre}} {{$user->encargado->apellido}}</td>
           
                     
  
@@ -66,21 +72,21 @@ Listado de Casos | Bufette
                     
                       <div class="btn-group">
           
-                          {!! Form::model($user, ['route'=>['casos.update', $user->id], 'method'=>'DELETE']) !!}
+                          {!! Form::model($user, ['route'=>['citas.update', $user->id], 'method'=>'DELETE']) !!}
 
-                         <!--  <a href="{{route("casos.show", ['id' => $user->id])}}" class="btn btn-default btn-success fa fa-search"><b></b></a>  -->
+                           <a href="{{route("citas.show", ['id' => $user->id])}}" class="btn btn-default btn-success fa fa-search"><b></b></a>  
                           
-                           <a href="{{route("pdf", ["id" => $user->id])}}" class="btn btn-info fa fa-file-pdf-o"><b></b></a> 
+                          <!-- <a href="{{route("word_caso", ["id" => $user->id])}}" class="btn btn-info fa fa-file-word-o"><b></b></a> -->
                           
                           
                           @if (\App\Http\Controllers\RolesController::editar(2))
-                          <a href="{{route("casos.edit", ['id' => $user->id])}}" onclick="return confirm('Seguro que Desea Editar el Caso #{{$user->id}}')" class="btn btn-default btn-warning fa fa-pencil"><b></b></a> 
+                          <a href="{{route("citas.edit", ['id' => $user->id])}}" onclick="return confirm('Seguro que Desea Editar la cita #{{$user->id}}')" class="btn btn-default btn-warning fa fa-pencil"><b></b></a> 
                           @endif
 
 
                           @if (\App\Http\Controllers\RolesController::borrar(2))
 
-                          <button type='submit' class="btn btn-default btn-danger fa fa-trash" onclick="return confirm('Seguro que Desea eliminar el Caso #{{$user->id}}')" ></i></button>
+                          <button type='submit' class="btn btn-default btn-danger fa fa-trash" onclick="return confirm('Seguro que Desea eliminar la cita #{{$user->id}}')" ></i></button>
                           
                           @endif
 
@@ -107,11 +113,11 @@ Listado de Casos | Bufette
             <div class="box-footer clearfix">
 
               @if (\App\Http\Controllers\RolesController::agregar(2))
-                <a href="{{route('casos.create')}}" class="btn btn-default btn-warning btn-flat pull-left"><b>Nuevo Caso</b></a> 
+                <a href="{{route('citas.create')}}" class="btn btn-default btn-warning btn-flat pull-left"><b>Nueva Cita</b></a> 
               @endif
 
               <ul class="pagination pagination-sm no-margin pull-right">
-                {{ $orders->links() }}
+                {{ $citas->links() }}
               </ul>
 
             </div>

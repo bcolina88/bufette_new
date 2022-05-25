@@ -34,9 +34,9 @@
 
                     <div class="col-md-6">
                       <br>
-                      <label for="exampleInputPassword1">Nombre</label> <span style="color: #E6674A;">*</span>
+                      <label for="exampleInputPassword1">Proceso</label> <span style="color: #E6674A;">*</span>
                  
-                       {!! Form::text('proceso', null, ['class' => 'form-control', 'placeholder' => 'Nombre', 'required']) !!}
+                       {!! Form::text('proceso', null, ['class' => 'form-control', 'placeholder' => 'Proceso', 'required']) !!}
                       
                     </div>
 

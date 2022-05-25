@@ -8,6 +8,8 @@ use App\Model\Role;
 use App\Model\Caso;
 use App\Model\Expediente;
 use App\Model\Cliente;
+use Barryvdh\DomPDF\Facade as PDF;
+
 use Illuminate\Support\Facades\File;
 
 use DB;
@@ -77,9 +79,10 @@ class CasosController extends Controller
 
         $user2 = [];
         $tipo = "guardar";
-        $expedientes = Expediente::where('estado','!=',"Terminado")->where('estado','!=',"Rechazado")->get();
+        $expedientes = Expediente::all();
         $abogados = User::where('idrole','=',2)->get();
         $clientes = cliente::all();
+
 
         return view('caso.crear',compact('user2','tipo','expedientes','clientes','abogados'));
     }
@@ -412,6 +415,26 @@ class CasosController extends Controller
 
         return \Response::make($content,200,$headers);
         
+    }
+
+
+    public function pdf($id)
+    {        
+        /**
+         * toma en cuenta que para ver los mismos 
+         * datos debemos hacer la misma consulta
+        **/
+       
+
+       // return $ytd;
+
+        //$audiencia = Audiencia::find($id);
+
+        $caso =  caso::with(['expediente','abogado','cliente'])->where('id',$id)->first();
+
+        $pdf = PDF::loadView('pdf.recibo_caso', compact('caso'));
+
+        return $pdf->download('recibo_caso.pdf');
     }
 
 

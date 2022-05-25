@@ -18,6 +18,8 @@ class CreateCitasTable extends Migration
             $table->string('fecha');
             $table->text('motivo');
             $table->string('prioridad');
+            $table->boolean('notificar');
+            
 
             $table->integer('cliente_id')->unsigned();
             $table->integer('encargado_id')->unsigned();

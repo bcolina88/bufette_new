@@ -126,7 +126,7 @@
                             <br>
                             <label for="exampleInputPassword1">Estado</label> 
     
-                              <select class="form-control select2" id="estado" name="estado" style="width: 100%;">
+                              <select class="form-control select2" id="active" name="active" style="width: 100%;">
                                 <option value="">Seleccione estado</option>
                                 <option value="1">Activo</option>
                                 <option value="0">Inactivo</option>
@@ -200,7 +200,7 @@
      // $("#datepicker_contrato").val("{{$user2->fecha_contrato}}").trigger('change');
    //   $("#datepicker_despido").val("{{$user2->fecha_despido}}").trigger('change');
    //   $("#datepicker_inicio").val("{{$user2->fecha_nacimiento}}").trigger('change');
-      $("#estado").val("{{$user2->active}}").trigger('change');
+      $("#active").val("{{$user2->active}}").trigger('change');
    //   $("#seguro_social").val("{{$user2->seguro_social}}").trigger('change');
 
      
@@ -227,7 +227,7 @@ $('#ingresar').click(function(){
 
 
 
-         if (( $('[name="nombre"]').val() ==="") ||  ($('[name="apellido"]').val() ==="")|| ($('[name="ciudad"]').val() ==="")|| ($('[name="estado"]').val() ==="")|| ($('[name="codigo_postal"]').val() ==="")|| ($('[name="correo"]').val() ==="")) {
+         if (( $('[name="nombre"]').val() ==="") ||  ($('[name="apellido"]').val() ==="")|| ($('[name="ciudad"]').val() ==="")|| ($('[name="active"]').val() ==="")|| ($('[name="codigo_postal"]').val() ==="")|| ($('[name="correo"]').val() ==="")) {
     
 
 

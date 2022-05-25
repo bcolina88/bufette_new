@@ -13,7 +13,7 @@ class Cita extends Model
      * @var array
      */
     protected $fillable = [
-       'motivo','fecha','cliente_id','encargado_id','caso_id', 'prioridad', 
+       'notificar','motivo','fecha','cliente_id','encargado_id','caso_id', 'prioridad', 
 
     ];
 

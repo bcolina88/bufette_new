@@ -151,7 +151,7 @@ class AudienciasController extends Controller
             $user = Audiencia::firstOrCreate([
               		'idexpediente' => $request->expediente,
                     'senalamiento' => $request->description,
-                    'idcliente'        => $request->actor,
+                    'idcliente'    => $request->actor,
                     'fecha'        => $request->fecha,
                     'hora'         => $request->hora,
                     'demandado'    => $request->demandado,

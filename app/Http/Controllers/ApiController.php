@@ -11,6 +11,7 @@ use App\Model\User;
 use App\Model\Permiso;
 use App\Model\Role;
 use App\Model\Audiencia;
+use App\Model\Cita;
 
 
 use Carbon\Carbon;
@@ -333,14 +334,24 @@ class ApiController extends Controller
                       ->select('audiencias.*')
                       ->get();
 
+        $citas = Cita::where("citas.fecha", $dia_siguiente)        
+                      ->where("citas.notificar","=",1)        
+                      ->select('citas.*')
+                      ->get();
 
-        $total = count($audiencias);
+              
+
+
+        $t1 = count($audiencias);
+        $t2 = count($citas);
+
+        $total = $t1 + $t2;
                     
 
 
     
 
-        return response()->Json(['audiencias' => $audiencias,'total' => $total], 200, [], JSON_NUMERIC_CHECK);
+        return response()->Json(['audiencias' => $audiencias, 'citas' => $citas,'total' => $total], 200, [], JSON_NUMERIC_CHECK);
 
       
 

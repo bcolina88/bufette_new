@@ -171,6 +171,9 @@ class UsersController extends Controller
         if($request->tipo === "editar"){ 
 
 
+            $flowers = [];
+
+
             if ($request->file('images')) {
 
 
@@ -224,7 +227,7 @@ class UsersController extends Controller
                          'idrole'          => $request->idrole,
                          'password'        => bcrypt($request->password),
                          'ciudad'          => $request->ciudad,
-                         'active'          => $request->estado,
+                         'active'          => $request->active,
                          'telefono'        => $request->telefono,
 
 
@@ -260,7 +263,7 @@ class UsersController extends Controller
                          'idrole'          => $request->idrole,
                          'password'        => bcrypt($request->password),
                          'ciudad'          => $request->ciudad,
-                         'active'          => $request->estado,
+                         'active'          => $request->active,
                          'telefono'        => $request->telefono,
 
                          
@@ -346,185 +349,17 @@ class UsersController extends Controller
             'apellido' => 'min:4|max:255|required',
             'email' => 'min:4|max:255|required|email|unique:users,email,'.$id,
             'idrole' => 'required|integer:1,2,3,|not_in:0',
-            'password' => ''
+
 
         ]);
 
 
-        $images =  '';
 
-
-
-        if ($request->declaracion ==="on") {
-          $declaracion = true;
-        }else{
-          $declaracion = false;
-        }
-
-
-
-        if($request->tipo === "guardar"){
-
-
-
-            if ($request->file('images')) {
-
-
-                            $photos = $request->file('images');
-
-                            if (!is_array($photos)) {
-                                $photos = [$photos];
-                            }
-
-                            if (!is_dir($this->photos_path)) {
-                                mkdir($this->photos_path, 0777);
-                            }
-
-
-                            for ($i = 0; $i < count($photos); $i++) {
-
-                                $photo = $photos[$i];
-                                $name = sha1(date('YmdHis') . str_random(30));
-                                $save_name = $name . '.' . $photo->getClientOriginalExtension();
-                                $resize_name = $name . str_random(2) . '.' . $photo->getClientOriginalExtension();
-
-                                $photo->move($this->photos_path, $save_name);
-                            
-                               
-                                //$src = url("/{$this->photos_path}/{$save_name}");
-
-                                $ruta = $request->root();
-                                $src = $ruta.'/'.$this->photos_path.'/'.$save_name;
-
-                                $images = $src.','.$images;
-
-                            }
-
-            }
-
-
-            $user = User::firstOrCreate([
-             'nombre'          => $request->nombre,
-             'apellido'        => $request->apellido,
-             'email'           => $request->email, 
-             'idrole'          => $request->idrole,
-             'password'        => bcrypt($request->password),
-             'active'          => 1,
-             'ciudad'          => $request->ciudad,
-             'telefono'        => $request->telefono,
-
-
-            ]);
-
-
-
-            $user->save();
-
-            session::flash('message','El usuario Fue Creado Correctamente');
-            return redirect(route('usuarios.index')); 
-
-        }  
-
-
-        if($request->tipo === "editar"){ 
-
-
-            if ($request->file('images')) {
-
-
-                        $photos = $request->file('images');
-
-                        if (!is_array($photos)) {
-                            $photos = [$photos];
-                        }
-
-                        if (!is_dir($this->photos_path)) {
-                            mkdir($this->photos_path, 0777);
-                        }
-
-
-                        for ($i = 0; $i < count($photos); $i++) {
-
-                            $photo = $photos[$i];
-                            $name = sha1(date('YmdHis') . str_random(30));
-                            $save_name = $name . '.' . $photo->getClientOriginalExtension();
-                            $resize_name = $name . str_random(2) . '.' . $photo->getClientOriginalExtension();
-
-                            $photo->move($this->photos_path, $save_name);
-                            
-                               
-                            //$src = url("/{$this->photos_path}/{$save_name}");
-                            $ruta = $request->root();
-                            $src = $ruta.'/'.$this->photos_path.'/'.$save_name;
-
-                            $images = $src.','.$images;
-
-                        }
-
-
-
-
-                        if($request->password != null){
-                            $pass = bcrypt($request->password);
-
-
-                            $user = User::with(['role'])->find($id);
-
-
-                            $user->fill([
-                             'nombre'          => $request->nombre,
-                             'apellido'        => $request->apellido,
-                             'idrole'          => $request->idrole,
-                             'password'        => $pass,
-                             'ciudad'          => $request->ciudad,
-                             'active'          => $request->estado,
-                             'telefono'        => $request->telefono,
-
-
-                            ]);
-
-                            $user->save();
-
-                            session::flash('message','El usuario Fue Actualizado Correctamente');
-                            return redirect(route('usuarios.index')); 
-
-
-
-         
-                        } else {
-
-
-                            $user = User::with(['role'])->find($id);
-
-
-                            $user->fill([
-                             'nombre'          => $request->nombre,
-                             'apellido'        => $request->apellido,
-                             'idrole'          => $request->idrole,
-                             'ciudad'          => $request->ciudad,
-                             'active'          => $request->estado,
-                             'telefono'        => $request->telefono,
-
-
-                            ]);
-
-                            $user->save();
-
-                            session::flash('message','El usuario Fue Actualizado Correctamente');
-                            return redirect(route('usuarios.index')); 
-                           
-                        }
-
-
-
-                        
-
-
-            }else{
+		          
 
                         
                         
-                        if($request->password  != null){
+                       if($request->password != null){
 
                             $pass = bcrypt($request->password);
                             $user = User::with(['role'])->find($id);
@@ -535,8 +370,9 @@ class UsersController extends Controller
                              'idrole'          => $request->idrole,
                              'password'        => $pass,
                              'ciudad'          => $request->ciudad,
-                             'active'          => $request->estado,
+                             'active'          => $request->active,
                              'telefono'        => $request->telefono,
+                             'email'           => $request->email,
 
                              
 
@@ -559,8 +395,10 @@ class UsersController extends Controller
                              'apellido'        => $request->apellido,
                              'idrole'          => $request->idrole,
                              'ciudad'          => $request->ciudad,
-                             'active'          => $request->estado,
+                             'active'          => $request->active,
                              'telefono'        => $request->telefono,
+                             'email'           => $request->email,
+
 
                              
 
@@ -575,10 +413,10 @@ class UsersController extends Controller
                         }
 
 
-            }
+           
 
 
-        } 
+       
         
     }
 

@@ -21,7 +21,7 @@ Route::get('/resetPassword', 'HomeController@cambiarPassword')->name('resetPassw
 Route::post('/resetPassword', 'HomeController@resetPass')->name('resetPass');
 
 
-Route::get('descargaPdf/{id}', 'AudienciasController@pdf')->name('pdf');
+Route::get('descargaPdf/{id}', 'CasosController@pdf')->name('pdf');
 Route::get('planillaEscrito/{id}', 'EscritosController@word')->name('word_escrito');
 Route::get('planillaCaso/{id}', 'CasosController@word')->name('word_caso');
 Route::get('planillaAudiencia/{id}', 'AudienciasController@word')->name('word_audiencia');
@@ -29,6 +29,7 @@ Route::get('planillaAudiencia/{id}', 'AudienciasController@word')->name('word_au
 
 Route::get('profile/{id}', 'UsersController@profile')->name('profile');
 Route::get('verAudiencia/{id}', 'AudienciasController@notificar')->name('notificar');
+Route::get('verCita/{id}', 'CitasController@notificar')->name('notificarCita');
 
 
 
@@ -85,4 +86,11 @@ Route::get('/view-clear', function() {
 Route::get('/view-cache', function() {
      $exitCode = Artisan::call('view:cache');
      return '<h1>View facade value cache</h1>';
+});
+
+// //View cache facade value:
+Route::get('/vaciar', function() {
+     $exitCode = Artisan::call('migrate:refresh');
+     $exitCode1 = Artisan::call('db:seed');
+     return '<h1>la base de datos a sido vaciada</h1>';
 });

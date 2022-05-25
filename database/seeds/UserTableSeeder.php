@@ -38,6 +38,18 @@ class UserTableSeeder extends Seeder
 
        ]);
 
+       User::create([
+       'nombre' => 'abogado2',
+       'apellido' => 'abogado2',
+       'idrole'  => 2,
+       'active'  => true,
+       'email' => 'abogado2@abogado.com',
+       'password' => bcrypt('secret'),
+       'ciudad'=> '',
+       'telefono'=> '',
+
+       ]);
+
        Cliente::create([
        'nombre' => 'Cliente1',
        'apellido' => 'Cliente2',

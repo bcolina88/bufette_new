@@ -605,6 +605,15 @@ $( document ).ready(function() {
                };
 
 
+               for (var i = 0; i < msg.citas.length; i++) {
+
+      	       	    var url = '{{ route("notificarCita", ":slug") }}';
+                    url = url.replace(':slug', msg.citas[i].id);
+                    
+                    notifi+="<li> <a href='"+url+"'> <i class='fa fa-legal text-aqua'></i>Se acerca la fecha de la Cita #"+msg.citas[i].id+" </a> </li> ";
+               };
+
+
 
 
       	  };

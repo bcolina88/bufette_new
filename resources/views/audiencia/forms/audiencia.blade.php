@@ -263,7 +263,7 @@
       $('[name="fecha"]').val("{{$user2->fecha}}").trigger('change');
       $('[name="hora"]').val("{{$user2->hora}}").trigger('change');
       $('[name="localidad"]').val("{{$user2->localidad}}").trigger('change');
-      $('[name="actor"]').val("{{$user2->actor}}").trigger('change');
+      $('[name="actor"]').val("{{$user2->idcliente}}").trigger('change');
       $('[name="demandado"]').val("{{$user2->demandado}}").trigger('change');
       $('[name="expediente"]').val("{{$user2->idexpediente}}").trigger('change');
       $('[name="notificar"]').val("{{$user2->notificar}}").trigger('change');
