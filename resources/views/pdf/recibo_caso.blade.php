@@ -58,7 +58,7 @@
         <div class="">
             
             <h2><b>Bufette Torrez</b></h2>
-            <p>Calle primero de abril #102.</p>
+            <p>Dirección: Calle primero de abril #102.</p>
         </div>
 
 
