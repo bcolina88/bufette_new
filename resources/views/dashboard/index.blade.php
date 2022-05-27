@@ -10,67 +10,102 @@
     <!-- Main content -->
   <section class="content">
 
-      <div class="row">
+    @if (Auth::user()->idrole == 1)
 
-      <!--
-        <div class="col-md-3 col-sm-6 col-xs-12">
-          <div class="info-box">
-            <span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
+	    <div class="row">
 
-            <div class="info-box-content">
-              <span class="info-box-text">Cambios</span>
-              <span class="info-box-number"> <small></small></span>
-            </div>
-      
-          </div>
-       
-        </div>
-  
-        <div class="col-md-3 col-sm-6 col-xs-12">
-          <div class="info-box">
-            <span class="info-box-icon bg-red"><i class="fa fa-car"></i></span>
+	        <div class="col-md-6 col-sm-6 col-xs-12">
+	          <div class="info-box">
+	            <span class="info-box-icon bg-green"><i class="fa fa-suitcase"></i></span>
 
-            <div class="info-box-content">
-              <span class="info-box-text">Lavados</span>
-              <span class="info-box-number">  </span>
-            </div>
-        
-          </div>
-    
-        </div>
-  
+	            <div class="info-box-content">
+	              <span class="info-box-text" style="color:white;">0000</span>
+	              <span class="info-box-text">Casos Ganados del mes</span>
+	              <span class="info-box-number"> {{ $total_casos_ganados_mes }}</span>
+	            </div>
+	         
+	          </div>
+	   
+	        </div>
 
-       
-        <div class="clearfix visible-sm-block"></div>
+	  
+	        <div class="col-md-6 col-sm-6 col-xs-12">
+	          <div class="info-box">
+	            <span class="info-box-icon bg-red"><i class="fa fa-suitcase"></i></span>
 
-        <div class="col-md-3 col-sm-6 col-xs-12">
-          <div class="info-box">
-            <span class="info-box-icon bg-green"><i class="ion ion-ios-cart-outline"></i></span>
+	            <div class="info-box-content">
+	              <span class="info-box-text" style="color:white;">0000</span>
+	              <span class="info-box-text">Casos Fallidos del mes</span>
+	              <span class="info-box-number"> {{ $total_casos_fallidos_mes }}</span>
+	            </div>
+	        
+	          </div>
+	    
+	        </div>
+	  
 
-            <div class="info-box-content">
-              <span class="info-box-text">Ventas Totales</span>
-              <span class="info-box-number">$ S/C</span>
-              <span class="info-box-number"></span>
-            </div>
-         
-          </div>
-   
-        </div>
+	       
+	        <div class="clearfix visible-sm-block"></div>
 
-        <div class="col-md-3 col-sm-6 col-xs-12">
-          <div class="info-box">
-            <span class="info-box-icon bg-yellow"><i class="ion ion-ios-people-outline"></i></span>
 
-            <div class="info-box-content">
-              <span class="info-box-text">Creditos</span>
-              <span class="info-box-number"></span>
-            </div>
+	        <div class="col-md-6 col-sm-6 col-xs-12">
+	          <div class="info-box">
+	            <span class="info-box-icon bg-aqua"><i class="fa fa-suitcase"></i></span>
 
-          </div>
-     
-        </div>-->
-  
-      </div>
+	            <div class="info-box-content">
+	              <span class="info-box-text" style="color:white;">0000</span>
+	              <span class="info-box-text">Casos en disputa del mes</span>
+	              <span class="info-box-number"> {{ $total_casos_en_disputa_mes }}</span>
+	            </div>
+	      
+	          </div>
+	       
+	        </div>
+
+	        
+	        <div class="col-md-6 col-sm-6 col-xs-12">
+	          <div class="info-box">
+	            <span class="info-box-icon bg-yellow"><i class="fa fa-fw fa-money"></i></span>
+
+	            <div class="info-box-content">
+	              <span class="info-box-text" style="color:white;">0000</span>
+	              <span class="info-box-text">Creditos del mes</span>
+	              <span class="info-box-number">{{number_format($dinero_mes, 2, ',' , '.' )}}</span>
+	            </div>
+
+	          </div>
+	     
+	        </div>
+
+
+	        <div class="clearfix visible-sm-block"></div>
+
+
+	        <div class="col-md-6 col-sm-6 col-xs-12">
+	          <div class="info-box">
+	            <span class="info-box-icon bg-blue"><i class="fa fa-suitcase"></i></span>
+
+	            <div class="info-box-content">
+	              <span class="info-box-text" style="color:white;">0000</span>
+	              <span class="info-box-text">Casos totales del mes</span>
+	              <span class="info-box-number"> {{ $total_casos_mes }}</span>
+	            </div>
+	      
+	          </div>
+	       
+	        </div>
+
+
+
+	        
+
+
+
+
+	  
+	    </div>
+
+    @endif
   
 
 

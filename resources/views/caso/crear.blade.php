@@ -1,6 +1,6 @@
 @extends('layout.template')
 @section('title')
-Crear Caso | Bufette 
+Crear Caso | Bufette Torrez
 @endsection
 
 

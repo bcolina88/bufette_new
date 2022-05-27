@@ -165,7 +165,7 @@ class AudienciasController extends Controller
 
             $user->save();
 
-            session::flash('message','La Audiencia Fue Creada Correctamente');
+            session::flash('message','La audiencia fue creada correctamente');
             return redirect(route('audiencias.index')); 
 
 
@@ -235,7 +235,7 @@ class AudienciasController extends Controller
 
                         $user->save();
 
-                        session::flash('message','La Audiencia Fue Actualizada Correctamente');
+                        session::flash('message','La audiencia fue actualizada correctamente');
                         return redirect(route('audiencias.index')); 
 
 
@@ -264,7 +264,7 @@ class AudienciasController extends Controller
 
                         $user->save();
 
-                        session::flash('message','La Audiencia Fue Actualizada Correctamente');
+                        session::flash('message','La audiencia fue actualizada correctamente');
                         return redirect(route('audiencias.index')); 
 
 
@@ -361,7 +361,7 @@ class AudienciasController extends Controller
         }
 
         Audiencia::destroy($id);
-        session::flash('message','La Audiencia Fue Eliminada Correctamente');
+        session::flash('message','La audiencia fue eliminada correctamente');
         return redirect(route('audiencias.index')); 
 
 

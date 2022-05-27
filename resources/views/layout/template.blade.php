@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>@yield('title', 'Inicio | Bufette ') </title>
+  <title>@yield('title', 'Inicio | Bufette Torrez') </title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="stylesheet" href="{{ asset('bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
@@ -60,7 +60,7 @@
       <span class="logo-mini">
       </span>
       <!-- logo for regular state and mobile devices -->
-     <span class="logo-lg"><b>Bufette</b> </span>
+     <span class="logo-lg"><b>Bufette Torrez</b> </span>
     </a>
 
     <!-- Header Navbar -->
@@ -269,6 +269,8 @@
           </a>
 
           <ul class="treeview-menu">
+
+            
             <li class="treeview">
               <a href="#"> Usuarios
                 <span class="pull-right-container">
@@ -287,7 +289,7 @@
 
               </ul>
             </li>
-             <li class="treeview">
+            <li class="treeview">
               <a href="#"> Roles
                 <span class="pull-right-container">
                   <i class="fa fa-angle-left pull-right"></i>
@@ -308,9 +310,13 @@
 
               </ul>
             </li>
-            
+
           
           </ul>
+          
+                 
+
+
         </li>
         @endif
 
@@ -318,6 +324,12 @@
         @if(\App\Http\Controllers\RolesController::ver(10))
         <li ><a href="{{ route('resetPassword') }}"><i class="fa fa-key"></i> <span>Cambiar Contraseña</span></a></li>
         @endif
+
+        @if (Auth::user()->idrole == 1)
+        <li ><a href="{{ route('vaciarBD') }}"><i class="fa fa-table"></i> <span> Vaciar BD</span></a></li>
+        @endif
+           
+  
   
         <li>
           <a href="{{ route('logout') }}"  onclick="event.preventDefault(); document.getElementById('frm-logout').submit();">
@@ -354,7 +366,7 @@
 
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2022 <a href="#"><b> Bufette </b></a></strong> All rights reserved.
+    <strong>Copyright &copy; 2022 <a href="#"><b> Bufette Torrez</b></a></strong> All rights reserved.
   </footer>
  
   <!-- Control Sidebar -->

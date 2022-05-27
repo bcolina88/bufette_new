@@ -1,6 +1,6 @@
 @extends('layout.template')
 @section('title')
-Editar cliente | Bufette 
+Editar cliente | Bufette Torrez
 @endsection
 @section('content')
 

@@ -1,6 +1,6 @@
 @extends('layout.template')
 @section('title')
-Detalle de cita | Bufette
+Detalle de cita | Bufette Torrez
 @endsection
 @section('content')
 

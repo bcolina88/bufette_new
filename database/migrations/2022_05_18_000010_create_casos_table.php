@@ -21,6 +21,7 @@ class CreateCasosTable extends Migration
             $table->string('posicion_cliente');
             $table->string('tipo_pago');
             $table->string('tarifa');
+            $table->date('fecha');
             $table->text('descripcion')->nullable();
             $table->integer('idexpediente')->unsigned();
             $table->integer('idabogado')->unsigned();

@@ -1,6 +1,6 @@
 @extends('layout.template')
 @section('title')
-Crear rol | Bufette H&M Legal.
+Crear rol | Bufette Torrez
 @endsection
 
 

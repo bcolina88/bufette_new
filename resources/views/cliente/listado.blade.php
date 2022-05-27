@@ -1,6 +1,6 @@
 @extends('layout.template')
 @section('title')
-Listado de clientes | Bufette 
+Listado de clientes | Bufette Torrez
 @endsection
 @section('content')
 
@@ -66,12 +66,12 @@ Listado de clientes | Bufette
 
                           <a href="{{route("clientes.show", ['id' => $cliente->id])}}" class="btn btn-default btn-success fa fa-search"><b></b></a> 
                           
-                          @if (\App\Http\Controllers\RolesController::editar(4))
+                          @if (\App\Http\Controllers\RolesController::editar(2))
                           <a href="{{route("clientes.edit", ['id' => $cliente->id])}}" onclick="return confirm('Seguro que Desea Editar a {{$cliente->nombre}}')" class="btn btn-default btn-warning fa fa-pencil"><b></b></a> 
                           @endif
 
 
-                          @if (\App\Http\Controllers\RolesController::borrar(4))
+                          @if (\App\Http\Controllers\RolesController::borrar(2))
 
                           <button type='submit' class="btn btn-default btn-danger fa fa-trash" onclick="return confirm('Seguro que Desea eliminar a {{$cliente->nombre}}')" ></i></button>
                           
@@ -99,7 +99,7 @@ Listado de clientes | Bufette
             <!-- /.box-body -->
             <div class="box-footer clearfix">
 
-              @if (\App\Http\Controllers\RolesController::agregar(4))
+              @if (\App\Http\Controllers\RolesController::agregar(2))
                 <a href="{{route('clientes.create')}}" class="btn btn-default btn-warning btn-flat pull-left"><b>Nuevo cliente</b></a> 
               @endif
 

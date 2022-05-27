@@ -155,6 +155,7 @@ class CasosController extends Controller
                     'idabogado'         => $request->abogado,
                     'idcliente'			=> $request->cliente,
                     'estado'			=> $request->estado,
+                    'fecha'				=> $date,
 
 
             ]);
@@ -163,7 +164,7 @@ class CasosController extends Controller
 
             $user->save();
 
-            session::flash('message','El Caso Fue Creado Correctamente');
+            session::flash('message','El caso fue creado correctamente');
             return redirect(route('casos.index')); 
 
 
@@ -238,7 +239,7 @@ class CasosController extends Controller
 
                         $user->save();
 
-                        session::flash('message','El Caso Fue Actualizado Correctamente');
+                        session::flash('message','El caso fue actualizado correctamente');
                         return redirect(route('casos.index')); 
 
 
@@ -273,7 +274,7 @@ class CasosController extends Controller
 
                         $user->save();
 
-                        session::flash('message','El Caso Fue Actualizado Correctamente');
+                        session::flash('message','El caso Fue actualizado correctamente');
                         return redirect(route('casos.index')); 
 
 
@@ -380,7 +381,7 @@ class CasosController extends Controller
         }
 
         Caso::destroy($id);
-        session::flash('message','El Caso Fue Eliminado Correctamente');
+        session::flash('message','El caso fue eliminado correctamente');
         return redirect(route('casos.index')); 
 
     }

@@ -1,6 +1,6 @@
 @extends('layout.template')
 @section('title')
-Crear cliente | Bufette 
+Crear cliente | Bufette Torrez
 @endsection
 
 

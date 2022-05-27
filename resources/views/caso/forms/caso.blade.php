@@ -190,7 +190,7 @@
    
                           <option value="">Seleccione estado</option>
                           <option value="Ganado">Ganado</option>
-                          <option value="Perdido">Perdido</option>
+                          <option value="Fallido">Fallido</option>
                           <option value="En disputa">En disputa</option>
 
                         

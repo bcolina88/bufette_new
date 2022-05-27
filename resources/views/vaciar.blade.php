@@ -1,6 +1,6 @@
 @extends('layout.template')
 @section('title')
-Cambiar Contraseña | Bufette Torrez
+Vaciar BD | Bufette Torrez.
 @endsection
 @section('content')
 

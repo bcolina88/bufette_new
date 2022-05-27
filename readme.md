@@ -42,3 +42,7 @@
 ```bash
  $ php artisan serve
  ```
+
+ ```bash
+ $ php artisan db:seed --class=TruncateTableSeeder
+ ```

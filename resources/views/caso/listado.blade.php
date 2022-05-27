@@ -1,6 +1,6 @@
 @extends('layout.template')
 @section('title')
-Listado de Casos | Bufette
+Listado de Casos | Bufette Torrez
 @endsection
 @section('content')
 
@@ -73,12 +73,12 @@ Listado de Casos | Bufette
                            <a href="{{route("pdf", ["id" => $user->id])}}" class="btn btn-info fa fa-file-pdf-o"><b></b></a> 
                           
                           
-                          @if (\App\Http\Controllers\RolesController::editar(2))
+                          @if (\App\Http\Controllers\RolesController::editar(5))
                           <a href="{{route("casos.edit", ['id' => $user->id])}}" onclick="return confirm('Seguro que Desea Editar el Caso #{{$user->id}}')" class="btn btn-default btn-warning fa fa-pencil"><b></b></a> 
                           @endif
 
 
-                          @if (\App\Http\Controllers\RolesController::borrar(2))
+                          @if (\App\Http\Controllers\RolesController::borrar(5))
 
                           <button type='submit' class="btn btn-default btn-danger fa fa-trash" onclick="return confirm('Seguro que Desea eliminar el Caso #{{$user->id}}')" ></i></button>
                           
@@ -106,7 +106,7 @@ Listado de Casos | Bufette
             <!-- /.box-body -->
             <div class="box-footer clearfix">
 
-              @if (\App\Http\Controllers\RolesController::agregar(2))
+              @if (\App\Http\Controllers\RolesController::agregar(5))
                 <a href="{{route('casos.create')}}" class="btn btn-default btn-warning btn-flat pull-left"><b>Nuevo Caso</b></a> 
               @endif
 

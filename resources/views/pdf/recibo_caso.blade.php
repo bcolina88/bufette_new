@@ -57,7 +57,7 @@
     <div class="col-md-12" style="font-size: 10px;line-height: 0.5">
         <div class="">
             
-            <h2><b>Colegio Odontológico de Cipolletti</b></h2>
+            <h2><b>Bufette</b></h2>
             <p>Sarmiento 336 - T. 4782952 - (8324) Cipolletti - R.N.</p>
             <p>Pers.Jur.Dto.731/84 - C.U.I.T.30-62567879-6 - Ing.B.Ag.Ret.313/80 - Jub.DRP 62567879-6</p>
         </div>
@@ -81,7 +81,7 @@
                             <p><b>Fecha: </b></p>
                          </td>
                         <td style="width: 150px;border-top: 1px solid #fff;border-bottom: 2px solid #fff;" class="text-right;">
-                            <p><b>{{$caso->created_at}}</b></p>
+                            <p><b>{{ date('d-m-Y', strtotime($caso->created_at)) }}</b></p>
                         </td>
 
                     </tr>
@@ -111,6 +111,8 @@
                         <td style="border-top: 0px solid #fff;border-bottom: 0px solid #fff;" class="text-left;">
                             <p>{{$caso->cliente->nombre}} {{$caso->cliente->apellido}}</p>
                         </td>
+                        <td style="width: 300px;color:white;border-top: 1px solid #fff;border-bottom: 2px solid #fff;">00000</td> 
+                        <td style="width: 300px;color:white;border-top: 1px solid #fff;border-bottom: 2px solid #fff;">00000</td> 
 
                     </tr>
 
@@ -121,6 +123,8 @@
                         <td style="border-top: 0px solid #fff;border-bottom: 0px solid #fff;" class="text-left;">
                             <p>{{$caso->posicion_cliente}}</p>
                         </td>
+                        <td style="width: 300px;color:white;border-top: 1px solid #fff;border-bottom: 2px solid #fff;">00000</td> 
+                        <td style="width: 300px;color:white;border-top: 1px solid #fff;border-bottom: 2px solid #fff;">00000</td> 
 
                     </tr>
 
@@ -132,6 +136,8 @@
                         <td style="border-top: 0px solid #fff;border-bottom: 0px solid #fff;" class="text-left;">
                             <p>{{$caso->proceso }} </p>
                         </td>
+                        <td style="width: 300px;color:white;border-top: 1px solid #fff;border-bottom: 2px solid #fff;">00000</td> 
+                        <td style="width: 300px;color:white;border-top: 1px solid #fff;border-bottom: 2px solid #fff;">00000</td> 
 
                     </tr>
                     <tr style=" border-top: 0px solid #fff;border-bottom: 0px solid #fff;border-top: 0px solid #fff;border-bottom: 0px solid #fff;">
@@ -141,6 +147,8 @@
                         <td style="border-top: 0px solid #fff;border-bottom: 0px solid #fff;" class="text-left;">
                             <p>{{$caso->tipo_proceso}}</p>
                         </td>
+                        <td style="width: 300px;color:white;border-top: 1px solid #fff;border-bottom: 2px solid #fff;">00000</td> 
+                        <td style="width: 300px;color:white;border-top: 1px solid #fff;border-bottom: 2px solid #fff;">00000</td> 
 
                     </tr>
                     <tr style=" border-top: 0px solid #fff;border-bottom: 0px solid #fff;border-top: 0px solid #fff;border-bottom: 0px solid #fff;">
@@ -150,6 +158,8 @@
                         <td style="border-top: 0px solid #fff;border-bottom: 0px solid #fff;" class="text-left;">
                             <p>{{$caso->estado}}</p>
                         </td>
+                        <td style="width: 300px;color:white;border-top: 1px solid #fff;border-bottom: 2px solid #fff;">00000</td> 
+                        <td style="width: 300px;color:white;border-top: 1px solid #fff;border-bottom: 2px solid #fff;">00000</td> 
 
                     </tr>
 
@@ -160,6 +170,8 @@
                         <td style="border-top: 0px solid #fff;border-bottom: 0px solid #fff;" class="text-left;">
                             <p>{{$caso->expediente->numero}}</p>
                         </td>
+                        <td style="width: 300px;color:white;border-top: 1px solid #fff;border-bottom: 2px solid #fff;">00000</td> 
+                        <td style="width: 300px;color:white;border-top: 1px solid #fff;border-bottom: 2px solid #fff;">00000</td> 
 
                     </tr>
 
@@ -170,6 +182,8 @@
                         <td style="border-top: 0px solid #fff;border-bottom: 0px solid #fff;" class="text-left;">
                             <p>{{$caso->abogado->nombre}} {{$caso->abogado->apellido}}</p>
                         </td>
+                        <td style="width: 300px;color:white;border-top: 1px solid #fff;border-bottom: 2px solid #fff;">00000</td> 
+                        <td style="width: 300px;color:white;border-top: 1px solid #fff;border-bottom: 2px solid #fff;">00000</td> 
 
                     </tr>
 
@@ -180,6 +194,8 @@
                         <td style="border-top: 0px solid #fff;border-bottom: 0px solid #fff;" class="text-left;">
                             <p>{{$caso->tipo_pago}}</p>
                         </td>
+                        <td style="width: 300px;color:white;border-top: 1px solid #fff;border-bottom: 2px solid #fff;">00000</td> 
+                        <td style="width: 300px;color:white;border-top: 1px solid #fff;border-bottom: 2px solid #fff;">00000</td> 
 
                     </tr>
       
@@ -212,8 +228,8 @@
                     </tr>
                     <tr style=" border-top: 1px solid #fff;border-bottom: 2px solid #fff;border-top: 1px solid #fff;border-bottom: 2px solid #fff;">
                       
-                        <td style="border-top: 1px solid #fff;border-bottom: 2px solid #fff;text-align:left;" class="text-left">
-                            <p><b>{!! $caso->descripcion !!}</b></p>
+                        <td style="border-top: 1px solid #fff;border-bottom: 2px solid #fff;text-align:left;" >
+                            <p class="text-align: justify">{!! $caso->descripcion !!}</p>
                         </td>
                         
 
@@ -227,7 +243,7 @@
 
     </div>
 
-<br><br>
+<br>
  
 
     <div class="col-md-12" style="font-size: 12px;line-height: 0.0000001;text-align:left;border-top: 1px solid #fff;border-bottom: 2px solid #fff;padding: 0px">
@@ -246,10 +262,10 @@
 
                     <tr style=" border-top: 1px solid #fff;border-bottom: 2px solid #fff;border-top: 1px solid #fff;border-bottom: 2px solid #fff;padding: 0px">
                       
-                        <td style="width: 170px;text-align:center;color:white;padding: 0px"> <p>000000</p> </td> 
-                        <td style="width: 150px;color:white;padding: 0px"> <p>000000</p> </td> 
-                        <td style="width: 170px;padding: 0px">  <p><b>Total Tarifa</b></p> </td> 
-                        <td style="width: 150px;text-align:right;padding: 0px"> <p><b>{{number_format($caso->tarifa, 2, ',' , '.' )}}</b></p></td> 
+                        <td style="border-top: 1px solid #fff;border-bottom: 2px solid #fff;border-top: 1px solid #fff;border-bottom: 2px solid #fff;width: 170px;text-align:center;color:white;padding: 0px"> <p>000000</p> </td> 
+                        <td style="border-top: 1px solid #fff;border-bottom: 2px solid #fff;border-top: 1px solid #fff;border-bottom: 2px solid #fff;width: 150px;color:white;padding: 0px"> <p>000000</p> </td> 
+                        <td style="border-top: 1px solid #fff;border-bottom: 2px solid #fff;border-top: 1px solid #fff;border-bottom: 2px solid #fff;width: 170px;padding: 0px">  <p><b>Total Tarifa</b></p> </td> 
+                        <td style="border-top: 1px solid #fff;border-bottom: 2px solid #fff;border-top: 1px solid #fff;border-bottom: 2px solid #fff;width: 150px;text-align:right;padding: 0px"> <p><b>{{number_format($caso->tarifa, 2, ',' , '.' )}}</b></p></td> 
 
                     </tr>
       

@@ -1,6 +1,6 @@
 @extends('layout.template')
 @section('title')
-Listado de roles | Bufette
+Listado de roles | Bufette Torrez
 @endsection
 @section('content')
 
@@ -50,11 +50,15 @@ Listado de roles | Bufette
                       <div class="btn-group">
                {!! Form::model($boxe, ['route'=>['roles.update', $boxe->id], 'method'=>'DELETE']) !!}
 
-  
-              <a href="{{route("roles.edit", ['id' => $boxe->id])}}" onclick="return confirm('Seguro que Desea Editar a rol {{$boxe->tipo}}')" class="btn btn-default btn-warning fa fa-pencil"><b></b></a> 
+  				@if (\App\Http\Controllers\RolesController::editar(9))
+                <a href="{{route("roles.edit", ['id' => $boxe->id])}}" onclick="return confirm('Seguro que Desea Editar a rol {{$boxe->tipo}}')" class="btn btn-default btn-warning fa fa-pencil"><b></b></a> 
+                @endif
 
-              @if (Auth::user()->idusertype != 2)
-              <button type='submit' class="btn btn-default btn-danger fa fa-trash" onclick="return confirm('Seguro que Desea eliminar a rol {{$boxe->tipo}}')" ></i></button> @endif
+
+                @if (\App\Http\Controllers\RolesController::borrar(9))
+                  <button type='submit' class="btn btn-default btn-danger fa fa-trash" onclick="return confirm('Seguro que Desea eliminar a rol {{$boxe->tipo}}')" ></i></button> @endif
+                @endif
+            
             {!! Form::close() !!}
 
              
@@ -77,7 +81,11 @@ Listado de roles | Bufette
             </div>
             <!-- /.box-body -->
             <div class="box-footer clearfix">
+
+            @if (\App\Http\Controllers\RolesController::agregar(9))
              <a href="{{route('roles.create')}}" class="btn btn-default btn-warning btn-flat pull-left"><b>Nuevo rol</b></a> 
+            @endif 
+
               <ul class="pagination pagination-sm no-margin pull-right">
                 {{ $roles->links() }}
               </ul>

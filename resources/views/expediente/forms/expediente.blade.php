@@ -219,13 +219,13 @@ function agregarOrden(){
       })       
       .done(function(msg) {
 
-        if (msg === "creado") {
-          var message = 'El Expediente Fue Creado Correctamente';
+        if (msg == 'creado') {
+          var message = 'El expediente fue creado correctamente';
 
         };
 
-        if (msg === "editar") {
-          var message = 'El Expediente Fue Actualizado Correctamente';
+        if (msg == 'editar') {
+          var message = 'El expediente fue actualizado correctamente';
 
         };
 

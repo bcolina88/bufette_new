@@ -1,6 +1,6 @@
 @extends('layout.template')
 @section('title')
-Listado de Expedientes | Bufette
+Listado de Expedientes | Bufette Torrez
 @endsection
 @section('content')
 
@@ -73,12 +73,12 @@ Listado de Expedientes | Bufette
 
                           <a href="{{route("expedientes.show", ['id' => $user->id])}}" class="btn btn-default btn-success fa fa-search"><b></b></a> 
                           
-                          @if (\App\Http\Controllers\RolesController::editar(3))
+                          @if (\App\Http\Controllers\RolesController::editar(4))
                           <a href="{{route("expedientes.edit", ['id' => $user->id])}}" onclick="return confirm('Seguro que Desea Editar a el Expediente Nº {{$user->numero}}')" class="btn btn-default btn-warning fa fa-pencil"><b></b></a> 
                           @endif
 
 
-                          @if (\App\Http\Controllers\RolesController::borrar(3))
+                          @if (\App\Http\Controllers\RolesController::borrar(4))
 
                           <button type='submit' class="btn btn-default btn-danger fa fa-trash" onclick="return confirm('Seguro que Desea eliminar a el Expediente Nº {{$user->numero}}')" ></i></button>
                           
@@ -106,7 +106,7 @@ Listado de Expedientes | Bufette
             <!-- /.box-body -->
             <div class="box-footer clearfix">
 
-              @if (\App\Http\Controllers\RolesController::agregar(3))
+              @if (\App\Http\Controllers\RolesController::agregar(4))
                 <a href="{{route('expedientes.create')}}" class="btn btn-default btn-warning btn-flat pull-left"><b>Nuevo Expediente</b></a> 
               @endif
 

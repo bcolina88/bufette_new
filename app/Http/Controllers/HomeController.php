@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use Session;
 use DB;
 use App\Model\User;
+use App\Model\Caso;
+
 
 class HomeController extends Controller
 {
@@ -30,12 +32,20 @@ class HomeController extends Controller
 
         date_default_timezone_set("America/Chicago");
 
-        $carbon = new \Carbon\Carbon();
-        $date = $carbon->now();
-        $date = $date->format('Y-m-d');
+        $casos_mes = Caso::whereMonth('fecha',now()->month)->get();
+        $dinero_mes = Caso::whereMonth('fecha',now()->month)->where('estado','=','Ganado')->sum('tarifa');
+        $casos_ganados_mes = Caso::whereMonth('fecha',now()->month)->where('estado','=','Ganado')->get();
+        $casos_fallidos_mes = Caso::whereMonth('fecha',now()->month)->where('estado','=','Fallido')->get();
+        $casos_en_disputa_mes = Caso::whereMonth('fecha',now()->month)->where('estado','=','En disputa')->get();
 
 
-        return view('dashboard.index');
+        $total_casos_mes           = count($casos_mes);
+        $total_casos_ganados_mes   = count($casos_ganados_mes);
+        $total_casos_fallidos_mes  = count($casos_fallidos_mes);
+        $total_casos_en_disputa_mes = count($casos_en_disputa_mes);
+    
+
+        return view('dashboard.index', compact('total_casos_en_disputa_mes','total_casos_mes','total_casos_ganados_mes','total_casos_fallidos_mes','dinero_mes'));
 
     }
 
@@ -105,6 +115,47 @@ class HomeController extends Controller
 
 
         return view('auth.passwords.password', compact('change','email','errorr'));
+    }
+
+    public function resetBD(Request $request)
+    {
+       
+       $responsebd = false;
+       return view('auth.passwords.vaciar', compact('responsebd'));
+    }
+
+
+    public function vaciar()
+    {
+        $this->truncateTables([
+            'audiencias',
+            'casos',
+            'citas',
+            'expedientes',
+            'notificaciones'
+        ]);
+
+        $responsebd = true;
+        return view('auth.passwords.vaciar', compact('responsebd'));
+
+  
+        // Ejecutar los seeders:
+        //$this->call(ProfessionSeeder::class);
+    }
+
+    public function truncateTables(array $tables)
+    {
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0;');
+
+        foreach ($tables as $table) {
+            DB::table($table)->truncate();
+        }
+
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1;');
+
+        
+
+
     }
 
 

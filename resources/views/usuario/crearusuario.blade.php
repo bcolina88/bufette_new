@@ -1,6 +1,6 @@
 @extends('layout.template')
 @section('title')
-Crear usuario | Bufette 
+Crear usuario | Bufette Torrez
 @endsection
 
 

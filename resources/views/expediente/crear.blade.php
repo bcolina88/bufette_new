@@ -1,6 +1,6 @@
 @extends('layout.template')
 @section('title')
-Crear Expediente | Bufette
+Crear Expediente | Bufette Torrez
 @endsection
 
 

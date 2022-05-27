@@ -16,7 +16,7 @@ class Caso extends Model
      */
     protected $fillable = [
        'proceso', 'descripcion','idexpediente','documentos','idabogado','idcliente',
-       'tarifa','posicion_cliente','tipo_pago','tipo_proceso','estado'
+       'tarifa','posicion_cliente','tipo_pago','tipo_proceso','estado','fecha'
     ];
 
 

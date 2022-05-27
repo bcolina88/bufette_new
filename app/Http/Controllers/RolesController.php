@@ -196,7 +196,7 @@ class RolesController extends Controller
         $role->update($data);
 
 
-        session::flash('message','El Rol Fue actualizado Correctamente');
+        session::flash('message','El rol fue actualizado correctamente');
 
         //$boxes = boxe::find($id);
 
@@ -224,7 +224,7 @@ class RolesController extends Controller
             }
 
             Role::destroy($id);
-            session::flash('message','El Rol Fue Eliminado Correctamente');
+            session::flash('message','El rol fue eliminado correctamente');
             return redirect(route('roles.index')); 
  
 

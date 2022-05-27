@@ -219,7 +219,7 @@ class ExpedientesController extends Controller
     public function destroy($id)
     {
         Expediente::destroy($id);
-        session::flash('message','El Expediente Fue Eliminado Correctamente');
+        session::flash('message','El expediente fue eliminado correctamente');
         return redirect(route('expedientes.index')); 
     }
 

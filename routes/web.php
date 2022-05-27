@@ -47,6 +47,10 @@ Route::resource('/clientes','ClientesController');
 Route::resource('/citas','CitasController');
 
 
+Route::get('/vaciarBD', 'HomeController@resetBD')->name('vaciarBD');
+Route::post('/vaciarBD', 'HomeController@vaciar')->name('vaciar');
+
+
 //Rutas de la API.
 Route::prefix('api')->group(function () {
 	//Route::resource('/rutas','ApiController@index')->name('rutas');
@@ -88,9 +92,3 @@ Route::get('/view-cache', function() {
      return '<h1>View facade value cache</h1>';
 });
 
-// //View cache facade value:
-Route::get('/vaciar', function() {
-     $exitCode = Artisan::call('migrate:refresh');
-     $exitCode1 = Artisan::call('db:seed');
-     return '<h1>la base de datos a sido vaciada</h1>';
-});

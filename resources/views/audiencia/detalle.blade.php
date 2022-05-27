@@ -1,6 +1,6 @@
 @extends('layout.template')
 @section('title')
-Detalle de Audiencia | Bufette 
+Detalle de Audiencia | Bufette Torrez
 @endsection
 @section('content')
 
