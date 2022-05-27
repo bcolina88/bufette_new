@@ -57,9 +57,8 @@
     <div class="col-md-12" style="font-size: 10px;line-height: 0.5">
         <div class="">
             
-            <h2><b>Bufette</b></h2>
-            <p>Sarmiento 336 - T. 4782952 - (8324) Cipolletti - R.N.</p>
-            <p>Pers.Jur.Dto.731/84 - C.U.I.T.30-62567879-6 - Ing.B.Ag.Ret.313/80 - Jub.DRP 62567879-6</p>
+            <h2><b>Bufette Torrez</b></h2>
+            <p>Calle primero de abril #102.</p>
         </div>
 
 
