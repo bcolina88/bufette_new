@@ -18,7 +18,7 @@ Vaciar BD | Bufette Torrez
 
                 <div class="panel-body">
 
-                    <div style="text-align: center;font-size: 16px;" >Se vaciaran las siguientes tablas: Audiencias, Casos, Citas, Expedientes, Notificaciones.</div>
+                    <div style="text-align: center;font-size: 16px;" >Se vaciaran las siguientes tablas: Audiencias, Casos, Citas y Expedientes.</div>
 
                     <form class="form-horizontal" method="POST" action="{{ route('vaciar') }}">
                         {{ csrf_field() }}
